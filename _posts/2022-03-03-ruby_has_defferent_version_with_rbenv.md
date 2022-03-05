@@ -3,7 +3,9 @@
 layout: single 
 
 title:  "[m1 macOS]Ruby와 rbenv 버전이 다름" 
-
+categories: 삽질
+tag: [ruby, m1, gem PATH]
+toc: true
 ---
 
 
