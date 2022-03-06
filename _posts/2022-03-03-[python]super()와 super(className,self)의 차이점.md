@@ -1,3 +1,10 @@
+---
+layout: single 
+title:  "[python]super()와 super(className, self)의 차이점" 
+categories: python
+tag: [python, syntax, method]
+toc: true
+---
 # super()
 
 > *class* __super__([*type*[, *object-or-type*]])
