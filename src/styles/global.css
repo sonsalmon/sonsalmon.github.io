@@ -320,9 +320,10 @@ h3 {
   font-family: var(--font-serif);
 }
 
+/* 출처 줄은 한글이 섞이므로 고정폭이 아니라 본문 글꼴(명세 3절: 한글 낱말은 고정폭으로 쓰지 않는다) */
 .prose blockquote.excerpt p.source,
 .prose figcaption {
-  font-family: var(--font-mono);
+  font-family: var(--font-sans);
   font-size: 15px;
   line-height: 1.5;
   color: var(--muted);
