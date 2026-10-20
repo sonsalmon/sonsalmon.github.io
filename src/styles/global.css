@@ -289,3 +289,69 @@ h3 {
     scroll-behavior: auto !important;
   }
 }
+
+/* 블로그 고유 부품 (명세 3절): 새 색 없이 토큰만 */
+.prose .card {
+  border: 1px solid var(--fg);
+  border-radius: var(--radius);
+  padding: var(--space-16);
+  margin: 0 0 var(--space-24);
+}
+
+.prose .card p {
+  margin: 0;
+}
+
+.prose .card p + p {
+  margin-top: var(--space-8);
+}
+
+.prose .card-head {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.prose .card-q {
+  font-weight: 700;
+}
+
+.prose blockquote.excerpt {
+  font-family: var(--font-serif);
+}
+
+.prose blockquote.excerpt p.source,
+.prose figcaption {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.prose blockquote.excerpt p.source {
+  margin-top: var(--space-8);
+}
+
+.prose figure {
+  margin: 0 0 var(--space-24);
+}
+
+.prose figure img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.prose figcaption {
+  margin-top: var(--space-8);
+}
+
+/* ==이 글의 한 줄==: 주황 밑줄 (주황의 유일한 쓰임) */
+.prose mark {
+  background: none;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--orange);
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.2em;
+}
