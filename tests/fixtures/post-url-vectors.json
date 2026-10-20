@@ -1,0 +1,146 @@
+[
+  {
+    "site": {
+      "url": "https://sonsalmon.github.io",
+      "baseurl": "",
+      "permalink": "/:categories/:title/"
+    },
+    "cases": [
+      {
+        "date": "2026-10-20",
+        "slug": "hello-world",
+        "categories": [],
+        "url": "https://sonsalmon.github.io/hello-world/"
+      },
+      {
+        "date": "2026-10-20",
+        "slug": "my-post",
+        "categories": [
+          "python"
+        ],
+        "url": "https://sonsalmon.github.io/python/my-post/"
+      },
+      {
+        "date": "2026-01-05",
+        "slug": "two-cats",
+        "categories": [
+          "python",
+          "Syntax"
+        ],
+        "url": "https://sonsalmon.github.io/python/Syntax/two-cats/"
+      },
+      {
+        "date": "2026-03-09",
+        "slug": "upper-cat",
+        "categories": [
+          "Flutter"
+        ],
+        "url": "https://sonsalmon.github.io/Flutter/upper-cat/"
+      },
+      {
+        "date": "2026-07-01",
+        "slug": "korean-cat",
+        "categories": [
+          "파이썬"
+        ],
+        "url": "https://sonsalmon.github.io/파이썬/korean-cat/"
+      },
+      {
+        "date": "2026-07-01",
+        "slug": "korean-cats",
+        "categories": [
+          "파이썬",
+          "문법"
+        ],
+        "url": "https://sonsalmon.github.io/파이썬/문법/korean-cats/"
+      },
+      {
+        "date": "2026-07-01",
+        "slug": "three-cats",
+        "categories": [
+          "a",
+          "b",
+          "c"
+        ],
+        "url": "https://sonsalmon.github.io/a/b/c/three-cats/"
+      },
+      {
+        "date": "2026-07-01",
+        "slug": "bad cat",
+        "categories": [
+          "a b"
+        ],
+        "url": null
+      },
+      {
+        "date": "2026-07-01",
+        "slug": "Bad_Slug",
+        "categories": [],
+        "url": null
+      }
+    ]
+  },
+  {
+    "site": {
+      "url": "https://x.test/",
+      "baseurl": "/blog",
+      "permalink": "/:year/:i_month/:title.html"
+    },
+    "cases": [
+      {
+        "date": "2026-10-20",
+        "slug": "hello-world",
+        "categories": [],
+        "url": "https://x.test/blog/2026/10/hello-world.html"
+      },
+      {
+        "date": "2026-10-20",
+        "slug": "my-post",
+        "categories": [
+          "python"
+        ],
+        "url": "https://x.test/blog/2026/10/my-post.html"
+      },
+      {
+        "date": "2026-01-05",
+        "slug": "two-cats",
+        "categories": [
+          "python",
+          "Syntax"
+        ],
+        "url": "https://x.test/blog/2026/1/two-cats.html"
+      }
+    ]
+  },
+  {
+    "site": {
+      "url": "https://x.test",
+      "permalink": "pretty"
+    },
+    "cases": [
+      {
+        "date": "2026-10-20",
+        "slug": "hello-world",
+        "categories": [],
+        "url": "https://x.test/2026/10/20/hello-world/"
+      },
+      {
+        "date": "2026-10-20",
+        "slug": "my-post",
+        "categories": [
+          "python"
+        ],
+        "url": "https://x.test/python/2026/10/20/my-post/"
+      },
+      {
+        "date": "2026-01-05",
+        "slug": "two-cats",
+        "categories": [
+          "python",
+          "Syntax"
+        ],
+        "url": "https://x.test/python/Syntax/2026/01/05/two-cats/"
+      }
+    ]
+  }
+]
