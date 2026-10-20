@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { loadPosts, withBase } from '../lib/posts';
+const posts = await loadPosts();
+---
+
+<Base current="posts">
+  <h1 class="sr-only">글</h1>
+  <ul class="post-list">
+    {
+      posts.map((p) => (
+        <li>
+          <time class="mono" datetime={p.date}>{p.ym}</time>
+          <a href={withBase(p.path)}>{p.entry.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>

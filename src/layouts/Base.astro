@@ -1,0 +1,43 @@
+---
+import '@fontsource-variable/source-serif-4/wght.css';
+import '@fontsource/noto-serif-kr/600.css';
+import '@fontsource/ibm-plex-mono/latin-400.css';
+import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
+import '../styles/tokens.css';
+import '../styles/global.css';
+import { withBase } from '../lib/posts';
+
+interface Props {
+  title?: string;
+  current?: 'posts' | 'about';
+}
+const { title, current } = Astro.props;
+const fullTitle = title ? `${title} | sonsalmon` : 'sonsalmon';
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#f5f4f1" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#151513" media="(prefers-color-scheme: dark)" />
+    <title>{fullTitle}</title>
+  </head>
+  <body>
+    <div class="page">
+      <header class="site-head">
+        <a class="site-name" href={withBase('/')}>sonsalmon</a>
+        <nav aria-label="사이트 메뉴">
+          <a href={withBase('/')} aria-current={current === 'posts' ? 'page' : undefined}>글</a>
+          <span class="sep" aria-hidden="true">·</span>
+          <a href={withBase('/about/')} aria-current={current === 'about' ? 'page' : undefined}>소개</a>
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

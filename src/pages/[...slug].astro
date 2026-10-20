@@ -1,0 +1,28 @@
+---
+import { render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import { loadPosts } from '../lib/posts';
+
+export async function getStaticPaths() {
+  const posts = await loadPosts();
+  return posts.map((p) => ({
+    params: { slug: p.path.replace(/^\/|\/$/g, '') },
+    props: { post: p },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post.entry);
+---
+
+<Base title={post.entry.data.title} current="posts">
+  <article>
+    <header class="post-head">
+      <h1>{post.entry.data.title}</h1>
+      <p class="meta mono"><time datetime={post.date}>{post.ymd}</time> · {post.minutes}분</p>
+    </header>
+    <div class="prose">
+      <Content />
+    </div>
+  </article>
+</Base>

@@ -1,0 +1,11 @@
+---
+import Base from '../layouts/Base.astro';
+import { withBase } from '../lib/posts';
+---
+
+<Base title="없는 페이지">
+  <article class="prose">
+    <h1>없는 페이지</h1>
+    <p><a href={withBase('/')}>글 목록으로 가요</a></p>
+  </article>
+</Base>

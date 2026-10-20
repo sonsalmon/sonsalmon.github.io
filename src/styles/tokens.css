@@ -1,0 +1,39 @@
+/* 값 원본: 작업실 app/src/styles/tokens.css · tokens-dark.css (새 색은 없다). 역할 이름만 블로그용으로 줄였다.
+   어두운 판은 폰·컴퓨터 설정(prefers-color-scheme)만 따른다. 전환 단추는 없다. */
+:root {
+  color-scheme: light dark;
+
+  --bg: #f5f4f1;
+  --fg: #181818;
+  --muted: #666666;
+  --hairline: #e5e5e5;
+  --fog: #eeeeee;
+  --blue: #0d6ea5;
+  --orange: #fb631b;
+
+  --font-serif: 'Source Serif 4 Variable', 'Noto Serif KR', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+  /* 한글은 고정폭 글꼴에 넣지 않는다: 숫자·영문만 Plex Mono, 한글은 바로 Pretendard로 떨어진다 */
+  --font-mono: 'IBM Plex Mono', 'Pretendard Variable', Pretendard, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --space-8: 8px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-48: 48px;
+  --space-80: 80px;
+
+  --measure: 720px;
+  --radius: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #151513;
+    --fg: #efede8;
+    --muted: #a8a6a0;
+    --hairline: #302f2c;
+    --fog: #292826;
+    --blue: #5ab0e6;
+    --orange: #fb631b;
+  }
+}
