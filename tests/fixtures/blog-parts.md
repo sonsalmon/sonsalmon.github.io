@@ -23,6 +23,9 @@
 
 출처: [원작자](https://example.com/origin)
 
+![바로 아래 출처](https://example.com/tight.png)
+출처: [바로 아래](https://example.com/tight-origin)
+
 ![출처 없는 그림](https://example.com/plain.png)
 
 그냥 문단.

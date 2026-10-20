@@ -65,8 +65,16 @@ export const blogParts = {
     ctx.setProperty(last, 'data', { hProperties: { className: ['source'] } });
   },
 
-  // 그림 + 바로 다음 출처 문단 → figure
+  // 그림 + 출처 → figure. 출처는 바로 다음 줄(같은 문단, 맥 점검 규칙 모양)이거나 다음 문단
   paragraph(node, ctx) {
+    const [pic, gap, link, ...rest] = node.children;
+    if (pic?.type === 'image' && gap?.type === 'text' && /^\s*\n\s*출처\s*[:：]\s*$/.test(gap.value) && link?.type === 'link') {
+      ctx.replaceNode(node, el('figure', null, [
+        { type: 'image', url: pic.url, alt: pic.alt, title: pic.title, data: { hProperties: { loading: 'lazy' } } },
+        el('figcaption', null, [text(gap.value.trim() + ' '), link, ...rest]),
+      ]));
+      return;
+    }
     if (!isImageOnly(node)) return;
     const parent = ctx.parent(node);
     const next = parent?.children[ctx.indexOf(node) + 1];

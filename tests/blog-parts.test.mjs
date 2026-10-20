@@ -41,9 +41,13 @@ test('그림 + 출처 줄은 figure/figcaption, lazy', () => {
   assert.match(html, /<figure><img src="https:\/\/example.com\/meme.png" alt="밈 대체 글" loading="lazy"><figcaption>출처: <a href="https:\/\/example.com\/origin">원작자<\/a><\/figcaption><\/figure>/);
 });
 
+test('그림 바로 다음 줄(빈 줄 없이)의 출처도 figure/figcaption — 맥 점검 규칙(명세 3-1)과 같은 모양', () => {
+  assert.match(html, /<figure><img src="https:\/\/example.com\/tight.png" alt="바로 아래 출처" loading="lazy"><figcaption>출처: <a href="https:\/\/example.com\/tight-origin">바로 아래<\/a><\/figcaption><\/figure>/);
+});
+
 test('출처 없는 그림은 figure 가 아니라 일반 문단 + lazy', () => {
   assert.match(html, /<p><img src="https:\/\/example.com\/plain.png" alt="출처 없는 그림" loading="lazy"><\/p>/);
-  assert.equal(html.match(/<figure>/g).length, 1);
+  assert.equal(html.match(/<figure>/g).length, 2);
 });
 
 test('바깥 링크 ↗ 는 CSS(a[href^=http]::after)로 붙고, 새 색 없이 토큰만 쓴다', () => {
