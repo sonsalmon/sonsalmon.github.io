@@ -1,9 +1,8 @@
 ---
-layout: single 
-title:  "[python]super()와 super(className, self)의 차이점" 
+title: "[python]super()와 super(className, self)의 차이점"
 categories: python
-tag: [python, syntax, method]
-toc: true
+tags: [python, syntax, method]
+legacy_path: /python/python-super()와-super(className,self)의-차이점/
 ---
 # super()
 

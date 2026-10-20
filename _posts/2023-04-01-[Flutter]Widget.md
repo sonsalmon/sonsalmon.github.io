@@ -1,10 +1,8 @@
 ---
-layout: single 
-
-title:  "[Flutter]Widget" 
+title: "[Flutter]Widget"
 categories: Flutter
-tag: [flutter]
-toc: true
+tags: [flutter]
+legacy_path: /flutter/Flutter-Widget/
 ---
 
 

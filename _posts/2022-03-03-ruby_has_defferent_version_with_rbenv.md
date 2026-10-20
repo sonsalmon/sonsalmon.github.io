@@ -1,11 +1,8 @@
 ---
-
-layout: single 
-
-title:  "[m1 macOS]Ruby와 rbenv 버전이 다름" 
+title: "[m1 macOS]Ruby와 rbenv 버전이 다름"
 categories: spadework
-tag: [ruby, m1, gem PATH]
-toc: true
+tags: [ruby, m1, gem PATH]
+legacy_path: /spadework/ruby_has_defferent_version_with_rbenv/
 ---
 
 
