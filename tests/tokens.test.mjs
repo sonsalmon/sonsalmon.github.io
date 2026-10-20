@@ -46,6 +46,12 @@ const UI_PAIRS = [
   ['fg', 'bg'], // 카드 1px 선
 ];
 
+// 코드 상자: 강조 줄 면 = color-mix(fg 6%, fog) (sRGB 선형 섞기)
+const MIX = 0.03;
+const mixHex = (fg, fog) => '#' + [1, 3, 5].map((i) => Math.round(parseInt(fg.slice(i, i + 2), 16) * MIX + parseInt(fog.slice(i, i + 2), 16) * (1 - MIX)).toString(16).padStart(2, '0')).join('');
+const cssMix = readFileSync(new URL('../src/styles/global.css', import.meta.url), 'utf8').match(/\.codebox \.ln\.hl\s*\{[^}]*color-mix\(in srgb, var\(--fg\) (\d+)%, var\(--fog\)\)/);
+test('강조 줄 면의 섞는 비율이 시험의 계산과 같다', () => assert.equal(cssMix && +cssMix[1], MIX * 100));
+
 for (const [name, palette] of [['밝게', light], ['어둡게', dark]]) {
   for (const [a, b] of TEXT_PAIRS) {
     test(`대비(글자 4.5) ${name}: ${a} on ${b}`, () => {
@@ -53,6 +59,16 @@ for (const [name, palette] of [['밝게', light], ['어둡게', dark]]) {
       assert.ok(c >= 4.5, `${a} on ${b} = ${c.toFixed(2)}`);
     });
   }
+  const hl = mixHex(palette.fg, palette.fog);
+  for (const [a, label] of [['fg', '글자'], ['muted', '줄 번호·주석'], ['blue', '문자열']]) {
+    test(`대비(글자 4.5) ${name}: 코드 ${label}(${a}) on 강조 줄 면`, () => {
+      const c = contrast(palette[a], hl);
+      assert.ok(c >= 4.5, `${a} on ${hl} = ${c.toFixed(2)}`);
+    });
+  }
+  test(`대비(글자 4.5) ${name}: 코드 문자열 blue on fog`, () => {
+    assert.ok(contrast(palette.blue, palette.fog) >= 4.5);
+  });
   for (const [a, b] of UI_PAIRS) {
     test(`대비(UI 3) ${name}: ${a} on ${b}`, () => {
       const c = contrast(palette[a], palette[b]);
