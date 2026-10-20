@@ -14,7 +14,7 @@ export default defineConfig({
   build: { format: 'directory' },
   // 이미지 서비스를 쓰지 않는다(sharp 불필요).
   image: { service: { entrypoint: 'astro/assets/services/noop' } },
-  // 코드 색은 새 색을 만들지 않으려고 끈다. 코드 상자는 옅은 면 한 색.
+  // 코드 색칠은 Astro 기본(shiki 인라인 색) 대신 blogparts 의 코드 상자가 클래스로 한다(새 색 없음).
   // 블로그 고유 부품(trial·question·출처 발췌·==강조==·출처 달린 그림)은 직접 짠 mdast 플러그인
   markdown: { syntaxHighlight: false, processor: satteri({ mdastPlugins: [blogParts] }) },
   devToolbar: { enabled: false },

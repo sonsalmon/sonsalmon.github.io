@@ -266,6 +266,90 @@ h3 {
   font-size: inherit;
 }
 
+/* 코드 상자: 옅은 면 + 위 띠(언어·복사). 색은 토큰만, 줄 강조 면은 글자색을 조금 섞은 것 */
+.prose .codebox {
+  margin: 0 0 var(--space-24);
+  background: var(--fog);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.codebar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 36px;
+  padding: 4px 10px 4px 14px;
+  border-bottom: 1px solid var(--hairline);
+  font: 400 12px var(--font-mono);
+  color: var(--muted);
+}
+
+.codecopy {
+  font: 500 12px var(--font-sans);
+  color: var(--fg);
+  background: var(--bg);
+  border: 1px solid var(--fg);
+  border-radius: var(--radius);
+  padding: 2px 10px;
+  cursor: pointer;
+}
+
+.codecopy:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.prose .codebox pre {
+  margin: 0;
+  padding: var(--space-8) 0;
+  border-radius: 0;
+  font: 400 13px/1.7 var(--font-mono);
+  color: var(--fg);
+}
+
+.codebox .ln {
+  display: flex;
+  padding-right: 14px;
+  border-left: 3px solid transparent;
+}
+
+.codebox .ln:not(:has(.n)) {
+  padding-left: 11px;
+}
+
+.codebox .ln .t {
+  min-height: 1.7em;
+  white-space: pre;
+}
+
+.codebox .ln .n {
+  flex: none;
+  width: 36px;
+  padding-right: 12px;
+  text-align: right;
+  color: var(--muted);
+  user-select: none;
+}
+
+.codebox .ln.hl {
+  background: color-mix(in srgb, var(--fg) 3%, var(--fog));
+  border-left-color: var(--blue);
+}
+
+.codebox .kw {
+  font-weight: 600;
+}
+
+.codebox .str {
+  color: var(--blue);
+}
+
+.codebox .com {
+  color: var(--muted);
+  font-style: italic;
+}
+
 .prose table {
   display: block;
   max-width: 100%;

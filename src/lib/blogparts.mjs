@@ -1,6 +1,67 @@
 // 블로그 고유 부품(명세 3절): trial·question 펜스, 출처 발췌, ==강조==, 출처 달린 그림.
 // satteri(Astro 기본 마크다운 처리기)의 mdast 플러그인. 카드 안 글은 text 노드로만 만들어 HTML로 해석되지 않는다.
 
+import { createHighlighter } from 'shiki';
+import { createCssVariablesTheme } from 'shiki/core';
+
+// 코드 색: 인라인 색 없이 클래스만(kw 굵게·str 파랑·com 보조색 기울임). 색은 CSS가 토큰으로 건다.
+const THEME = createCssVariablesTheme({ name: 'css-variables', variablePrefix: '--shiki-', variableDefaults: {} });
+const LANGS = ['python', 'ruby', 'dart', 'javascript', 'typescript', 'jsx', 'tsx', 'bash', 'shell', 'json', 'yaml', 'html', 'css', 'sql', 'swift', 'java', 'c', 'cpp', 'markdown', 'toml', 'diff'];
+const highlighter = await createHighlighter({ themes: [THEME], langs: LANGS });
+const ALIAS = { py: 'python', rb: 'ruby', js: 'javascript', ts: 'typescript', sh: 'bash', zsh: 'bash', yml: 'yaml', md: 'markdown' };
+
+function tokenClass(t) {
+  const c = t.color || '';
+  if (c.includes('token-comment')) return 'com';
+  if (c.includes('token-string')) return 'str';
+  if (c.includes('token-keyword') && /^[A-Za-z_]/.test(t.content)) return 'kw';
+  return null;
+}
+
+// ```python {3,5-6} 의 줄 범위. 잘못된 조각은 무시
+function highlightLines(meta, total) {
+  const set = new Set();
+  const m = (meta || '').match(/\{([^}]*)\}/);
+  if (!m) return set;
+  for (const part of m[1].split(',')) {
+    const r = part.trim().match(/^(\d+)(?:-(\d+))?$/);
+    if (!r) continue;
+    const a = +r[1];
+    const b = r[2] ? +r[2] : a;
+    if (a < 1 || b < a || b > total) continue;
+    for (let i = a; i <= b; i++) set.add(i);
+  }
+  return set;
+}
+
+function codeBox(node) {
+  const raw = node.value.replace(/\n$/, '');
+  const lang = (node.lang || '').toLowerCase();
+  const id = ALIAS[lang] || lang;
+  const known = highlighter.getLoadedLanguages().includes(id);
+  const lines = known
+    ? highlighter.codeToTokens(raw, { lang: id, theme: 'css-variables' }).tokens
+    : raw.split('\n').map((content) => [{ content }]);
+  const numbered = lines.length >= 5;
+  const hl = highlightLines(node.meta, lines.length);
+  const rows = lines.map((toks, i) => {
+    const cls = ['ln', hl.has(i + 1) ? 'hl' : null].filter(Boolean).join(' ');
+    const spans = toks.map((t) => {
+      const k = known ? tokenClass(t) : null;
+      return k ? el('span', k, [text(t.content)]) : text(t.content);
+    });
+    return el('span', cls, [
+      ...(numbered ? [el('span', 'n', [text(String(i + 1))], { ariaHidden: 'true' })] : []),
+      el('span', 't', spans),
+    ]);
+  });
+  const bar = el('div', 'codebar', [
+    ...(lang ? [el('span', 'codelang', [text(lang)])] : [el('span', null, [])]),
+    el('button', 'codecopy', [text('복사')], { type: 'button', hidden: true }),
+  ]);
+  return el('div', 'codebox', [bar, el('pre', 'code', [el('code', null, rows)])]);
+}
+
 const el = (hName, className, children, extra = {}) => ({
   type: 'blockPart',
   children,
@@ -55,6 +116,7 @@ export const blogParts = {
   code(node, ctx) {
     if (node.lang === 'trial') ctx.replaceNode(node, trialCard(node.value));
     else if (node.lang === 'question') ctx.replaceNode(node, questionCard(node.value));
+    else ctx.replaceNode(node, codeBox(node));
   },
 
   // 출처 발췌: 인용 마지막 문단이 출처 줄이면
